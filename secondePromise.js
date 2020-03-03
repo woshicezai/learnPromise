@@ -3,6 +3,7 @@ const FULLFILLED = "fullfilled";
 const REJECTED = "rejected";
 
 function resolvePromise(newPromise,value,resolve,reject){
+  //很简化了 应该根据value的类型来做区分的
   resolve(value);
 }
 export default class AjPromise {
@@ -44,7 +45,7 @@ export default class AjPromise {
     let newPromise;
     return (newPromise = new AjPromise((resolve, reject) => {
       if (this.state == FULLFILLED) {
-        let x = fn(this.value);
+        let x = fn(this.value);//掘金是放在了setTimeout里面
         resolvePromise(newPromise, x, resolve, reject);
       } else if (this.state == PENDING) {
         this.resolveCallbackArrays.push(value => {
